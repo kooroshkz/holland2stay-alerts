@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>Holland2Stay alerts: know the moment a new home is listed</title>
+  <meta name="description" content="Free, self-hosted alerts for new Holland2Stay and Codomo residences. Pick your city, size and budget, get a message on Telegram, Discord, ntfy, email or 100+ other apps.">
+  <link rel="canonical" href="https://kooroshkz.github.io/holland2stay-alerts/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Holland2Stay alerts">
+  <meta property="og:description" content="Know the moment a Holland2Stay or Codomo home matching your search is listed.">
+  <meta property="og:url" content="https://kooroshkz.github.io/holland2stay-alerts/">
+  <meta property="og:image" content="https://kooroshkz.github.io/holland2stay-alerts/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "holland2stay-alerts",
+    "description": "Self-hosted alerts for new Holland2Stay and Codomo residences.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Linux, macOS, Windows, Docker",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+    "url": "https://kooroshkz.github.io/holland2stay-alerts/",
+    "codeRepository": "https://github.com/kooroshkz/holland2stay-alerts",
+    "license": "https://opensource.org/licenses/MIT"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Does it book homes for me?", "acceptedAnswer": {"@type": "Answer", "text": "No. It tells you, you book on the Holland2Stay website yourself. Automated booking is against their terms."}},
+      {"@type": "Question", "name": "How fast are the alerts?", "acceptedAnswer": {"@type": "Answer", "text": "Usually within two minutes during weekday release hours, a few minutes the rest of the day."}},
+      {"@type": "Question", "name": "Do I need a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Any computer that stays on works: a laptop, a Raspberry Pi, a NAS or a small VPS."}},
+      {"@type": "Question", "name": "Does it work for Codomo?", "acceptedAnswer": {"@type": "Answer", "text": "Holland2Stay becomes Codomo. Point base_url to the new site when listings move."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header class="nav">
+    <a class="brand" href="./">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.2 12 4l8 7.2V20a1 1 0 0 1-1 1h-4.5v-5.5h-5V21H5a1 1 0 0 1-1-1z"/></svg>
+      <span>holland2stay <b>alerts</b></span>
+    </a>
+    <nav>
+      <a href="#start">Start</a>
+      <a href="demo/">Demo</a>
+      <a href="https://github.com/kooroshkz/holland2stay-alerts">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Free · open source · self-hosted</p>
+      <h1>Know the moment a Holland2Stay home is listed.</h1>
+      <p class="lead">Good homes go in minutes. This watches the listings for you and messages your phone
+        when one matches your search: your cities, your size, your budget.</p>
+      <div class="cta">
+        <a class="button primary" href="#start">Get started</a>
+        <a class="button" href="demo/">See the demo</a>
+      </div>
+    </section>
+
+    <figure class="shot glass">
+      <img src="assets/dashboard.png" alt="The dashboard: matching homes, activity, and when new homes show up" width="1280" height="1720" loading="lazy">
+    </figure>
+
+    <section id="start">
+      <h2>Start in a minute</h2>
+      <div class="two">
+        <div class="glass card">
+          <h3>Docker</h3>
+          <pre><code>docker run -d --name h2s-alerts --restart unless-stopped \
+  -e H2S_CITIES="Eindhoven, Rotterdam" \
+  -e H2S_PRICE_MAX=1600 \
+  -e H2S_NOTIFY="tgram://BOT_TOKEN/CHAT_ID" \
+  -v h2s-data:/data -p 127.0.0.1:8080:8080 \
+  ghcr.io/kooroshkz/holland2stay-alerts</code></pre>
+          <p>Dashboard on <code>localhost:8080</code>. Runs on a Raspberry Pi too.</p>
+        </div>
+        <div class="glass card">
+          <h3>Python</h3>
+          <pre><code>pipx install git+https://github.com/kooroshkz/holland2stay-alerts
+h2s-alerts init
+h2s-alerts watch</code></pre>
+          <p><code>init</code> asks a few questions and sends a test message.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Alerts go where you already are</h2>
+      <ul class="chips">
+        <li>Telegram</li><li>Discord</li><li>ntfy</li><li>Slack</li><li>Email</li><li>Signal</li>
+        <li>Matrix</li><li>Pushover</li><li>Gotify</li><li>Home Assistant</li><li>Webhooks</li>
+        <li class="more">and 100+ more through <a href="https://github.com/caronc/apprise/wiki">Apprise</a></li>
+      </ul>
+      <div class="glass message">
+        <small>Telegram, 09:42</small>
+        <strong>Havenkade 136-B</strong>
+        <span>Eindhoven · Loft · €1,695</span>
+        <span>Indefinite · Furnished</span>
+        <span class="link">holland2stay.com/residences/havenkade-136-b.html</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>What you get</h2>
+      <div class="grid">
+        <div class="glass card"><h3>Your search</h3><p>Cities, bedrooms, budget, contract length, furnishing, move-in date.</p></div>
+        <div class="glass card"><h3>Only what's new</h3><p>New homes, homes back on the market, lottery homes that turn bookable, price drops. Never the same one twice.</p></div>
+        <div class="glass card"><h3>Lottery</h3><p>New lottery homes on Tuesday evening, with the Sunday 20:00 deadline.</p></div>
+        <div class="glass card"><h3>Early warning</h3><p>New buildings appear in the catalog weeks before they go on sale. You hear about them first.</p></div>
+        <div class="glass card"><h3>Dashboard</h3><p>What's available, what got taken and how fast, and the hours homes usually show up.</p></div>
+        <div class="glass card"><h3>Polite by design</h3><p>A check every few minutes, faster in the hours homes are released. It says who it is and backs off when asked.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Questions</h2>
+      <div class="faq">
+        <details class="glass"><summary>Does it book homes for me?</summary><p>No. It tells you, you book on the Holland2Stay website yourself. Automated booking is against their terms. Keep a browser tab open and stay logged in so you're one click away.</p></details>
+        <details class="glass"><summary>How fast are the alerts?</summary><p>Usually within two minutes during weekday release hours, a few minutes the rest of the day. Cheap homes in big cities can still go within a minute, so be ready to act.</p></details>
+        <details class="glass"><summary>Do I need a server?</summary><p>No. Any computer that stays on works: a laptop on power, a Raspberry Pi, a NAS or a small VPS.</p></details>
+        <details class="glass"><summary>What about the lottery?</summary><p>Lottery homes come out on Tuesday around 17:00 and you can sign up until Sunday 20:00. You get a message when ones matching your search appear.</p></details>
+        <details class="glass"><summary>Holland2Stay is becoming Codomo. Will it still work?</summary><p>That's the plan. When listings move, set <code>base_url</code> to the new site or update to the latest version.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Unofficial and independent. Not affiliated with, endorsed by or connected to Holland2Stay B.V. or Codomo.
+      Names are only used to describe what this works with. Use it at your own risk and follow their terms.</p>
+    <p><a href="https://github.com/kooroshkz/holland2stay-alerts">GitHub</a> · MIT license</p>
+  </footer>
+</body>
+</html>

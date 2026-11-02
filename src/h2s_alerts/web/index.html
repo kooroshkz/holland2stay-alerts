@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>holland2stay alerts</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body data-src="api/overview.json">
+  <div class="backdrop" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <main>
+    <header class="top">
+      <a class="brand" id="home" href="#">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.2 12 4l8 7.2V20a1 1 0 0 1-1 1h-4.5v-5.5h-5V21H5a1 1 0 0 1-1-1z"/></svg>
+        <span>holland2stay <b>alerts</b></span>
+      </a>
+      <div class="pill" id="state"><i></i><span>Loading</span></div>
+    </header>
+
+    <p class="search" id="search"></p>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="glass">
+      <div class="head"><h2>Available now</h2><span class="muted" id="available-count"></span></div>
+      <ul class="list" id="available"></ul>
+    </section>
+
+    <section class="glass" id="lottery-box" hidden>
+      <div class="head"><h2>Lottery</h2><span class="muted" id="lottery-deadline"></span></div>
+      <ul class="list" id="lottery"></ul>
+    </section>
+
+    <div class="grid">
+      <section class="glass">
+        <div class="head"><h2>Activity</h2></div>
+        <ol class="feed" id="events"></ol>
+      </section>
+      <div class="stack">
+        <section class="glass">
+          <div class="head"><h2>When homes show up</h2><span class="muted">Amsterdam time</span></div>
+          <div class="heat" id="heat"></div>
+        </section>
+        <section class="glass" id="cities-box" hidden>
+          <div class="head"><h2>By city</h2></div>
+          <ul class="bars" id="cities"></ul>
+        </section>
+        <section class="glass" id="buildings-box" hidden>
+          <div class="head"><h2>Coming up</h2><span class="muted">not on sale yet</span></div>
+          <ul class="list compact" id="buildings"></ul>
+        </section>
+      </div>
+    </div>
+
+    <footer>
+      <span>Unofficial. Not affiliated with Holland2Stay or Codomo.</span>
+      <a id="version" href="https://github.com/kooroshkz/holland2stay-alerts" target="_blank" rel="noopener"></a>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

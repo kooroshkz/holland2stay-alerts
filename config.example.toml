@@ -1,0 +1,46 @@
+# holland2stay-alerts settings
+# Copy to config.toml (or run `h2s-alerts init`). Every option can also be set with
+# an H2S_* environment variable, which wins over this file.
+
+[search]
+cities = ["Eindhoven", "Rotterdam"]   # empty = everywhere. `h2s-alerts cities` lists names
+# exclude_cities = ["Maastricht"]
+bedrooms = ["studio", "loft", "1"]    # studio, loft, 1, 2, 3, 4, or ranges like "2+" and "1-3"
+# price_min = 600
+price_max = 1600                      # euro per month, all in
+contract = ["long"]                   # long, short, or exact: indefinite, 2y, 1y, 6m, 4m
+# occupants = ["one", "couple"]       # one, couple, two, family, three, four
+# furnishing = ["furnished"]          # fully-furnished, furnished, semi-furnished, unfurnished
+# move_in_before = "2027-02-01"
+lottery = true                        # also tell me about lottery homes
+
+[notify]
+# Any Apprise link: https://github.com/caronc/apprise/wiki
+urls = [
+  # "tgram://BOT_TOKEN/CHAT_ID",
+  # "discord://WEBHOOK_ID/WEBHOOK_TOKEN",
+  # "ntfy://a-long-secret-topic",
+  # "mailtos://you:app-password@gmail.com",
+]
+# quiet_hours = "23:00-07:00"         # hold alerts, send what's still available afterwards
+# existing_on_start = false           # on the very first run, also send what matches already
+# digest_after = 4                    # more new homes than this at once become one message
+# health = true                       # tell me when Holland2Stay blocks us or changes
+
+[schedule]
+preset = "normal"                     # relaxed, normal or eager
+# hot_seconds = 120                   # release hours: weekdays 08:30-18:00 and 00:05-00:45
+# day_seconds = 300
+# night_seconds = 900
+# lottery_seconds = 600               # every 2 minutes on Tuesday 16:50-18:30 anyway
+
+[dashboard]
+enabled = true
+host = "127.0.0.1"                    # 0.0.0.0 to reach it from other devices
+port = 8080
+# password = "pick-one"               # basic auth, any user name
+
+[general]
+# data_dir = "~/.local/share/holland2stay-alerts"
+# base_url = "https://www.holland2stay.com"
+# log_level = "INFO"

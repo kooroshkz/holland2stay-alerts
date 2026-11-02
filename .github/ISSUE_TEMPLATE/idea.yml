@@ -1,0 +1,15 @@
+name: Idea
+description: A feature or an improvement
+labels: [idea]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like?
+      placeholder: "Alerts for homes that become available before a certain date..."
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does it help you?

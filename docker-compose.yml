@@ -1,0 +1,21 @@
+services:
+  h2s-alerts:
+    image: ghcr.io/kooroshkz/holland2stay-alerts:latest
+    container_name: h2s-alerts
+    restart: unless-stopped
+    environment:
+      H2S_CITIES: "Eindhoven, Rotterdam"
+      H2S_BEDROOMS: "studio, loft, 1"
+      H2S_PRICE_MAX: "1600"
+      H2S_NOTIFY: "tgram://BOT_TOKEN/CHAT_ID"
+      # H2S_DASHBOARD_PASSWORD: "pick-one"
+    volumes:
+      - h2s-data:/data
+      # or keep everything in a file instead of the variables above:
+      # - ./config.toml:/config/config.toml:ro
+    ports:
+      # only this machine; set H2S_DASHBOARD_PASSWORD before opening it up
+      - "127.0.0.1:8080:8080"
+
+volumes:
+  h2s-data:

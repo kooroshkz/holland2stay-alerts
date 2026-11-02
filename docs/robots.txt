@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kooroshkz.github.io/holland2stay-alerts/sitemap.xml

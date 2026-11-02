@@ -1,0 +1,27 @@
+name: Something's broken
+description: Alerts stopped, an error, or something looks wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      placeholder: "No alerts since Tuesday, the dashboard says: ..."
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `h2s-alerts doctor`
+      description: Remove notification links and passwords first.
+      render: text
+  - type: textarea
+    id: logs
+    attributes:
+      label: Recent log lines
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Version and how you run it
+      placeholder: "0.1.0, Docker on a Raspberry Pi"
