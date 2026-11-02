@@ -199,7 +199,8 @@ so look there first.
 
 ## Contributing
 
-Ideas, fixes and other landlords are welcome. See [CONTRIBUTING.md](https://github.com/kooroshkz/holland2stay-alerts/blob/main/CONTRIBUTING.md).
+Ideas, fixes and other landlords are welcome. If it helped you find a home, a ⭐ helps
+other people find it too. See [CONTRIBUTING.md](https://github.com/kooroshkz/holland2stay-alerts/blob/main/CONTRIBUTING.md).
 
 ## Disclaimer
 

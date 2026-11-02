@@ -193,6 +193,17 @@
     }
   }
 
+  // The star pill goes away for good once it's closed or clicked.
+  const star = $("star");
+  const STAR_KEY = "h2s-star-hidden";
+  const hideStar = () => {
+    star.classList.add("gone");
+    try { localStorage.setItem(STAR_KEY, "1"); } catch (e) { /* private mode */ }
+  };
+  try { if (localStorage.getItem(STAR_KEY)) star.hidden = true; } catch (e) { /* private mode */ }
+  star.querySelector("button").addEventListener("click", hideStar);
+  star.querySelector("a").addEventListener("click", () => setTimeout(hideStar, 500));
+
   load();
   setInterval(load, 15000);
   setInterval(() => data && renderState(), 1000);

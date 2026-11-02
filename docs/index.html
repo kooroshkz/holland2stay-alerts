@@ -141,5 +141,36 @@ h2s-alerts watch</code></pre>
       Names are only used to describe what this works with. Use it at your own risk and follow their terms.</p>
     <p><a href="https://github.com/kooroshkz/holland2stay-alerts">GitHub</a> · MIT license</p>
   </footer>
+
+  <div class="star">
+    <a href="https://github.com/kooroshkz/holland2stay-alerts" target="_blank" rel="noopener"
+       aria-label="Star holland2stay-alerts on GitHub">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.6l1.95 3.95 4.36.64-3.16 3.07.75 4.34L8 11.55 4.1 13.6l.75-4.34L1.69 6.19l4.36-.64z"/></svg>
+      <span>Star <span class="long">on GitHub</span></span>
+      <b id="stars" hidden></b>
+    </a>
+  </div>
+  <script>
+    // Star count, once it's worth showing. Cached for an hour per visit.
+    (async () => {
+      const el = document.getElementById("stars");
+      const show = (n) => {
+        if (n < 10) return;
+        el.textContent = n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, "")}k` : String(n);
+        el.hidden = false;
+      };
+      try {
+        const cached = JSON.parse(sessionStorage.getItem("h2s-stars") || "null");
+        if (cached && Date.now() - cached.t < 3600e3) return show(cached.n);
+      } catch (e) { /* no storage */ }
+      try {
+        const res = await fetch("https://api.github.com/repos/kooroshkz/holland2stay-alerts");
+        const n = (await res.json()).stargazers_count;
+        if (typeof n !== "number") return;
+        show(n);
+        try { sessionStorage.setItem("h2s-stars", JSON.stringify({ n, t: Date.now() })); } catch (e) { /* no storage */ }
+      } catch (e) { /* offline or rate limited: just the button */ }
+    })();
+  </script>
 </body>
 </html>
