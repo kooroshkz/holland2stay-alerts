@@ -7,13 +7,13 @@
 Self-hosted. One command. Alerts on Telegram, Discord, ntfy, Slack, email and 100+ other apps.
 
 [![CI](https://github.com/kooroshkz/holland2stay-alerts/actions/workflows/ci.yml/badge.svg)](https://github.com/kooroshkz/holland2stay-alerts/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-black)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-black)](https://github.com/kooroshkz/holland2stay-alerts/blob/main/LICENSE)
 ![Python](https://img.shields.io/badge/python-3.11%2B-black)
 ![Docker](https://img.shields.io/badge/docker-amd64%20%7C%20arm64-black)
 
 [Website](https://kooroshkz.github.io/holland2stay-alerts) · [Live demo](https://kooroshkz.github.io/holland2stay-alerts/demo/) · [Quick start](#quick-start)
 
-<img src="docs/assets/dashboard.png" alt="Dashboard" width="820">
+<img src="https://raw.githubusercontent.com/kooroshkz/holland2stay-alerts/main/docs/assets/dashboard.png" alt="Dashboard" width="820">
 
 </div>
 
@@ -39,12 +39,12 @@ docker run -d --name h2s-alerts --restart unless-stopped \
 
 The dashboard is on [localhost:8080](http://localhost:8080). To open it to other devices, publish
 the port without `127.0.0.1:` and set `H2S_DASHBOARD_PASSWORD`. Works on a Raspberry Pi or a NAS too.
-Prefer Compose? See [docker-compose.yml](docker-compose.yml).
+Prefer Compose? See [docker-compose.yml](https://github.com/kooroshkz/holland2stay-alerts/blob/main/docker-compose.yml).
 
 ### Python
 
 ```bash
-pipx install git+https://github.com/kooroshkz/holland2stay-alerts
+pipx install holland2stay-alerts
 h2s-alerts init     # a few questions, then a test message
 h2s-alerts watch
 ```
@@ -90,7 +90,7 @@ https://www.holland2stay.com/residences/havenkade-136-b.html
 
 ## Configuration
 
-Run `h2s-alerts init`, or copy [config.example.toml](config.example.toml) to `config.toml`:
+Run `h2s-alerts init`, or copy [config.example.toml](https://github.com/kooroshkz/holland2stay-alerts/blob/main/config.example.toml) to `config.toml`:
 
 ```toml
 [search]
@@ -161,7 +161,7 @@ and backs off when Holland2Stay asks it to.
 others can answer "any studios in Eindhoven under €1,300?". Install the extra first:
 
 ```bash
-pipx install "holland2stay-alerts[mcp] @ git+https://github.com/kooroshkz/holland2stay-alerts"
+pipx install "holland2stay-alerts[mcp]"
 ```
 
 ```json
@@ -197,7 +197,7 @@ new site, or update to the latest release.
 
 ## Contributing
 
-Ideas, fixes and other landlords are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+Ideas, fixes and other landlords are welcome. See [CONTRIBUTING.md](https://github.com/kooroshkz/holland2stay-alerts/blob/main/CONTRIBUTING.md).
 
 ## Disclaimer
 
@@ -205,4 +205,4 @@ This is an unofficial, independent project. It is not affiliated with, endorsed 
 connected to Holland2Stay B.V. or Codomo. Their names are only used to describe what this
 works with. It never books, pays, fills in forms or logs in. There's no guarantee you'll get
 a home, and it can stop working whenever the site changes. Provided as is, under the
-[MIT license](LICENSE).
+[MIT license](https://github.com/kooroshkz/holland2stay-alerts/blob/main/LICENSE).
