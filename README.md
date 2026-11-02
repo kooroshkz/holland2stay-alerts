@@ -192,8 +192,10 @@ yourself. You're responsible for how you use it.
 **Holland2Stay is becoming Codomo.** When listings move, set `base_url` (or `H2S_BASE_URL`) to the
 new site, or update to the latest release.
 
-**Alerts stopped.** Run `h2s-alerts doctor`. If Holland2Stay changed something, open an
-[issue](https://github.com/kooroshkz/holland2stay-alerts/issues).
+**Alerts stopped.** Run `h2s-alerts doctor`, and `h2s-alerts upstream` to see whether Holland2Stay
+changed something. A daily check runs the same test here and opens an
+[issue](https://github.com/kooroshkz/holland2stay-alerts/issues?q=label%3Aupstream) when it fails,
+so look there first.
 
 ## Contributing
 

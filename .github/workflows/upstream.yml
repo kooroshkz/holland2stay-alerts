@@ -1,0 +1,80 @@
+name: Upstream check
+
+# Once a day: does Holland2Stay still answer the way this tool expects?
+# Broken: the run fails (GitHub emails you) and an issue is opened, closed again once it works.
+# Something new (city ids, Codomo going live): a separate issue, the run stays green.
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: upstream
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install .
+
+      - name: Check Holland2Stay
+        id: check
+        run: |
+          set +e
+          h2s-alerts upstream --markdown report.md
+          rc=$?
+          # Cloudflare sometimes challenges cloud servers; one retry tells a blip from a change
+          if [ $rc -ne 0 ]; then sleep 300; h2s-alerts upstream --markdown report.md; rc=$?; fi
+          echo "failed=$([ $rc -ne 0 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open, update or close issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FAILED: ${{ steps.check.outputs.failed }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          broken="Holland2Stay changed something, alerts may be broken"
+          news="Holland2Stay added something new"
+          gh label create upstream --color 0E0E10 --description "Found by the daily upstream check" 2>/dev/null || true
+
+          find_issue() {
+            gh issue list --label upstream --state open --limit 50 --json number,title \
+              --jq ".[] | select(.title == \"$1\") | .number" | head -n1
+          }
+
+          {
+            echo "The daily check found this on $(date -u '+%Y-%m-%d %H:%M') UTC ([run]($RUN_URL))."
+            echo
+            cat report.md
+          } > body.md
+
+          open=$(find_issue "$broken")
+          if [ "$FAILED" = "true" ]; then
+            {
+              cat body.md
+              echo
+              echo "Run \`h2s-alerts upstream\` on your own machine to see if it is only GitHub's servers."
+            } > broken.md
+            if [ -n "$open" ]; then gh issue edit "$open" --body-file broken.md
+            else gh issue create --title "$broken" --label upstream --body-file broken.md; fi
+          elif [ -n "$open" ]; then
+            gh issue close "$open" --comment "Working again as of $(date -u '+%Y-%m-%d %H:%M') UTC ([run]($RUN_URL))."
+          fi
+
+          if grep -q "🆕" report.md && [ -z "$(find_issue "$news")" ]; then
+            gh issue create --title "$news" --label upstream --body-file body.md
+          fi
+
+      - name: Fail the run when something is broken
+        if: steps.check.outputs.failed == 'true'
+        run: exit 1

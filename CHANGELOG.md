@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- `h2s-alerts upstream` and a daily workflow that opens an issue when Holland2Stay changes
+
 ## 0.1.0
 
 First release.

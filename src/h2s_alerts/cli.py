@@ -292,6 +292,18 @@ def cmd_demo(args) -> int:
     return 0
 
 
+def cmd_upstream(cfg: Config, args) -> int:
+    from . import upstream
+
+    checks = upstream.run(Client(cfg.base_url, min_gap=2.0))
+    for c in checks:
+        line = f"{c.name}" + (dim(f"  {c.detail}") if c.detail else "")
+        print({"ok": ok, "fail": bad, "notice": warn}[c.status](line))
+    if args.markdown:
+        Path(args.markdown).write_text(upstream.markdown(checks), encoding="utf-8")
+    return 1 if any(c.status == "fail" for c in checks) else 0
+
+
 def cmd_mcp(cfg: Config, args) -> int:
     from .mcp_server import run
     run(cfg)
@@ -329,11 +341,14 @@ def parser() -> argparse.ArgumentParser:
     d.add_argument("--export", metavar="DIR", help="write a static copy instead of serving it")
     sub.add_parser("mcp", parents=[common], help="MCP server for AI assistants")
     sub.add_parser("health", parents=[common], help="exit 0 when the watcher is running")
+    up = sub.add_parser("upstream", parents=[common], help="check that Holland2Stay still works the same way")
+    up.add_argument("--markdown", metavar="FILE", help="also write a Markdown report")
     return p
 
 
 COMMANDS = {"watch": cmd_watch, "list": cmd_list, "cities": cmd_cities, "test": cmd_test,
-            "doctor": cmd_doctor, "stats": cmd_stats, "mcp": cmd_mcp, "health": cmd_health}
+            "doctor": cmd_doctor, "stats": cmd_stats, "mcp": cmd_mcp, "health": cmd_health,
+            "upstream": cmd_upstream}
 
 
 def main(argv: list[str] | None = None) -> int:
